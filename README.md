@@ -27,4 +27,3 @@ Haystack and solr4 setup
 
 3. Update the `stopwords_en.txt` path in the `schema.xml` to `lang/stopwords_en.txt` or create an empty file `stopwords_en.txt` in `/my/solr/config/`
 4. Copy `schema.xml` to `/my/solr/config/`
-
