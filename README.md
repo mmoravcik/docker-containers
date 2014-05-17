@@ -41,9 +41,11 @@ To verify run `psql -h 127.0.0.1 -p 5431 -U docker` on host computer. Password i
 
 Configuration
 -------------
-You can specify username, password, database name in the run docker command:
+You can specify username, password, database name in the run docker command
+
     -e "USERNAME:new_username" -e "PASSWORD=new_password" -e "DB=new_db_name"
 
 Specify the local data storage and logs. These will be then available in your host machine
+
     -v my/local/storage/:/data -v /my/loca/log/:/var/log/
 
