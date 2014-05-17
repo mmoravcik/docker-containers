@@ -11,27 +11,27 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc
 RUN apt-get update
 RUN apt-get install -y python-software-properties software-properties-common
 RUN apt-get install -y postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
+RUN apt-get install -y supervisor
+RUN apt-get install -y sudo
+RUN apt-get install -y vim
 
 # Switch to postgres user
 USER postgres
-
-RUN    /etc/init.d/postgresql start &&\
-    psql --command "CREATE USER $USERNAME WITH SUPERUSER PASSWORD '$PASSWORD';" &&\
-    createdb -O $USERNAME $DB
 
 # Allow remote connections to the database.
 RUN echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.3/main/pg_hba.conf
 
 RUN echo "listen_addresses='*'" >> /etc/postgresql/9.3/main/postgresql.conf
 
-EXPOSE 5432
+USER root
 
 # Add VOLUMEs to allow backup of config, logs and databases
 VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
 
+ADD ./deploy/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD ./scripts/start.sh /usr/local/bin/start.sh
-USER root
 RUN chmod +x /usr/local/bin/start.sh
 
-USER postgres
+EXPOSE 5432
+
 CMD ["/usr/local/bin/start.sh"]
