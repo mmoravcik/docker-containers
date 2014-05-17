@@ -25,7 +25,7 @@ RUN echo "listen_addresses='*'" >> /etc/postgresql/9.3/main/postgresql.conf
 RUN sed -i -e"s/data_directory =.*$/data_directory = '\\$DATA_DIR'/" /etc/postgresql/9.3/main/postgresql.conf
 
 # Add VOLUMEs to allow backup of config, logs and databases
-VOLUME  ["/var/log/postgresql", "/etc/postgresql", "$DATA_DIR"]
+VOLUME  ["/var/log", "/etc/postgresql", "$DATA_DIR"]
 
 ADD ./deploy/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD ./scripts/start.sh /usr/local/bin/start.sh
