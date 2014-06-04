@@ -9,8 +9,9 @@ Installation
 ------------
 Instal docker and then
 
-    mkdir -p /my/solr/config
+    clone the repo
     cd solr4
+    mkdir -p /my/solr/config
     sudo docker build -t sol4 .
     sudo docker run -ti -p 8983:8983 -v /my/solr/config/:/host/solr_conf solr4
 
@@ -33,6 +34,7 @@ PostgreSQL 9.3
 
 Installation
 ------------
+    clone the repo
     cd postgres
     sudo docker build -t postgres .
     sudo docker run -ti -p 5431:5432 -v /my/local/data/:/data -v /my/local/log/:/var/log/ postgres
